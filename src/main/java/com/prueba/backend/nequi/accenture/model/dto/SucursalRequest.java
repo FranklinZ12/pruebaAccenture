@@ -4,6 +4,6 @@ import lombok.Data;
 
 @Data
 public class SucursalRequest {
-    private SucursalDto sucursalDto;
-    private FranquiciaDto franquiciaDto;
+    private String nombreSucursal;
+    private Long idFranquicia;
 }
