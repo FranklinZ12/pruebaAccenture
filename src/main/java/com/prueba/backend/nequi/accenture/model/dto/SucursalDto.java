@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class SucursalDto {
     private String nombre;
-    private FranquiciaDto franquiciaDto;
+    private Long franquiciaId;
 }
