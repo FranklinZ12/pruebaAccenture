@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Getter@Setter@ToString@AllArgsConstructor@NoArgsConstructor
+@Data
+@EqualsAndHashCode(callSuper = false)
+@AllArgsConstructor@NoArgsConstructor
 public class Sucursal extends BaseEntity{
 
     @Id

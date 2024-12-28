@@ -2,14 +2,14 @@ package com.prueba.backend.nequi.accenture.model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
 @MappedSuperclass
-@Getter@Setter@ToString
+@Data
+@EqualsAndHashCode(callSuper = false)
+@AllArgsConstructor@NoArgsConstructor
 public class BaseEntity {
     @Column(updatable = false)
     private LocalDateTime createdAt;

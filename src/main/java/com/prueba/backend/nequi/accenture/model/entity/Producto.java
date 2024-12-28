@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Getter@Setter@ToString@AllArgsConstructor@NoArgsConstructor
+@Data
+@EqualsAndHashCode(callSuper = false)
+@AllArgsConstructor@NoArgsConstructor
 public class Producto extends BaseEntity{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
