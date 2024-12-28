@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(path = "/api", produces = {MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(path = "/api/franquicia", produces = {MediaType.APPLICATION_JSON_VALUE})
 @AllArgsConstructor
 public class FranquiciaController {
 
     private IFranquiciaService iFranquiciaService;
 
-    @PostMapping("/crearFranquicia")
+    @PostMapping("/crear")
     public ResponseEntity<ResponseDto> crearFranquicia(@RequestBody FranquiciaDto franquiciaDto){
         iFranquiciaService.creaFranquicia(franquiciaDto);
         return ResponseEntity
