@@ -33,4 +33,19 @@ public class ProductoController {
                 .status(HttpStatus.OK)
                 .body(new ResponseDto(FranquiciaConstants.STATUS_200, FranquiciaConstants.MESSAGE_200));
     }
+
+    @PutMapping("/actualizar")
+    public ResponseEntity<ResponseDto> actualizarStock(@RequestBody ProductoRequest productoRequest) {
+        boolean isUpdated = iProductoService.actualizarStock(productoRequest.getIdProducto(), productoRequest.getStock());
+
+        if (isUpdated) {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(new ResponseDto(FranquiciaConstants.STATUS_200, FranquiciaConstants.MESSAGE_200));
+        } else {
+            return ResponseEntity
+                    .status(HttpStatus.METHOD_NOT_ALLOWED)
+                    .body(new ResponseDto(FranquiciaConstants.STATUS_417, FranquiciaConstants.MESSAGE_417_UPDATE));
+            }
+    }
 }

@@ -73,4 +73,27 @@ public class ProductoServiceImpl implements IProductoService {
         productoRepository.delete(producto);
         return ProductoMapper.mapToProductoDto(producto, new ProductoDto());
     }
+
+    /**
+     * @param productoID
+     * @param stock
+     * @return
+     */
+    @Override
+    public boolean actualizarStock(Long productoID, int stock) {
+        boolean isUpdated = false;
+
+        Optional<Producto> optionalProducto = productoRepository.findById(productoID);
+        if (optionalProducto.isEmpty()) {
+            throw new FranquiciaAlredyExistsException("Producto no encontrado con el ID: " + productoID);
+        }
+
+        Producto producto = optionalProducto.get();
+        producto.setCantidadStock(stock);
+        producto.setUpdatedBy("DevFranklin");
+        producto.setUpdatedAt(LocalDateTime.now());
+        productoRepository.save(producto);
+        isUpdated = true;
+        return isUpdated;
+    }
 }
