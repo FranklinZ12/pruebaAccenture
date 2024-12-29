@@ -57,4 +57,20 @@ public class ProductoServiceImpl implements IProductoService {
 
         return ProductoMapper.mapToProductoDto(productoNuevo, new ProductoDto());
     }
+
+    /**
+     * Eliminar un producto por el ID
+     * @param productoID
+     * @return
+     */
+    @Override
+    public ProductoDto eliminarProducto(Long productoID) {
+        Optional<Producto> optionalProducto = productoRepository.findById(productoID);
+        if (optionalProducto.isEmpty()) {
+            throw new FranquiciaAlredyExistsException("Producto no encontrado con el ID: " + productoID);
+        }
+        Producto producto = optionalProducto.get();
+        productoRepository.delete(producto);
+        return ProductoMapper.mapToProductoDto(producto, new ProductoDto());
+    }
 }
