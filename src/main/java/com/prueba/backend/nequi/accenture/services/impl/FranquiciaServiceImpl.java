@@ -10,7 +10,9 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -34,5 +36,17 @@ public class FranquiciaServiceImpl implements IFranquiciaService {
         franquicia.setCreatedBy("DevFranklin");
         franquicia.setCreatedAt(LocalDateTime.now());
         franquiciaRepository.save(franquicia);
+    }
+
+    /**
+     * Devuelve todo las franquicias existentes
+     * @return
+     */
+    @Override
+    public List<FranquiciaDto> obtenerFranquicias() {
+        List<Franquicia> franquicias = franquiciaRepository.findAll();
+        return franquicias.stream()
+                .map(franquicia -> new FranquiciaDto(franquicia.getId(), franquicia.getNombre()))
+                .collect(Collectors.toList());
     }
 }

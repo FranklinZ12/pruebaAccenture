@@ -6,4 +6,5 @@ import lombok.Data;
 public class SucursalDto {
     private String nombre;
     private Long franquiciaId;
+    private Long sucursalId;
 }

@@ -2,6 +2,8 @@ package com.prueba.backend.nequi.accenture.services;
 
 import com.prueba.backend.nequi.accenture.model.dto.FranquiciaDto;
 
+import java.util.List;
+
 public interface IFranquiciaService {
 
     /**
@@ -10,4 +12,6 @@ public interface IFranquiciaService {
      * @return
      */
     void creaFranquicia(FranquiciaDto franquiciaDto);
+
+    List<FranquiciaDto> obtenerFranquicias();
 }

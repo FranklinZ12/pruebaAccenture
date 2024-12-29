@@ -29,7 +29,7 @@ public class SucursalService implements ISucursalService {
     public SucursalDto crearSucursal(String nombreSucursal, Long idFranquicia) {
         Optional<Franquicia> optionalFranquicia = franquiciaRepository.findById(idFranquicia);
         if (optionalFranquicia.isEmpty()) {
-            throw new FranquiciaAlredyExistsException("Franquicia no encontrada con el nombre: " + idFranquicia);
+            throw new FranquiciaAlredyExistsException("Franquicia no encontrada con el ID: " + idFranquicia);
         }
 
 
