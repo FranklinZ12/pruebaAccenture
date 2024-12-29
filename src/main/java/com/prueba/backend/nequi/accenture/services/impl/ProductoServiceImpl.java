@@ -3,8 +3,11 @@ package com.prueba.backend.nequi.accenture.services.impl;
 import com.prueba.backend.nequi.accenture.exception.FranquiciaAlredyExistsException;
 import com.prueba.backend.nequi.accenture.mapper.ProductoMapper;
 import com.prueba.backend.nequi.accenture.model.dto.ProductoDto;
+import com.prueba.backend.nequi.accenture.model.dto.ProductoRequest;
+import com.prueba.backend.nequi.accenture.model.entity.Franquicia;
 import com.prueba.backend.nequi.accenture.model.entity.Producto;
 import com.prueba.backend.nequi.accenture.model.entity.Sucursal;
+import com.prueba.backend.nequi.accenture.repository.FranquiciaRepository;
 import com.prueba.backend.nequi.accenture.repository.ProductoRepository;
 import com.prueba.backend.nequi.accenture.repository.SucursalRepository;
 import com.prueba.backend.nequi.accenture.services.IProductoService;
@@ -12,13 +15,17 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
 public class ProductoServiceImpl implements IProductoService {
     private SucursalRepository sucursalRepository;
     private ProductoRepository productoRepository;
+    private FranquiciaRepository franquiciaRepository;
     /**
      * @param sucursalID
      * @param nombreProducto
@@ -95,5 +102,55 @@ public class ProductoServiceImpl implements IProductoService {
         productoRepository.save(producto);
         isUpdated = true;
         return isUpdated;
+    }
+
+    /**
+     * @param franquiciaID
+     *
+     */
+    @Override
+    public List<ProductoRequest> obtenerProductoConMasStockPorFranquicia(Long franquiciaID) {
+        Optional<Franquicia> optionalFranquicia = franquiciaRepository.findById(franquiciaID);
+        if (optionalFranquicia.isEmpty()) {
+            throw new FranquiciaAlredyExistsException("Franquicia no encontrada con el ID: " + franquiciaID);
+        }
+
+        Franquicia franquicia = optionalFranquicia.get();
+
+        List<Sucursal> sucursales = sucursalRepository.findByFranquicia(franquicia);
+
+        if (sucursales.isEmpty()) {
+            throw new FranquiciaAlredyExistsException("Franquicia no tiene sucursales");
+        }
+
+        List<ProductoRequest> productosPorSucursal = new ArrayList<>();
+
+        for (Sucursal sucursal : sucursales) {
+            Optional<Producto> productoConMasStock = productoRepository
+                    .findTopBySucursalOrderByCantidadStockDesc(sucursal);
+            productoConMasStock.ifPresent(producto ->{
+                    ProductoRequest dto = new ProductoRequest();
+                    dto.setIdFranquicia(franquiciaID);
+                    dto.setIdProducto(producto.getId());
+                    dto.setNombreSucursal(sucursal.getNombre());
+                    dto.setNombreProducto(producto.getNombre());
+                    dto.setStock(producto.getCantidadStock());
+                    dto.setIdSucursal(sucursal.getId());
+                    productosPorSucursal.add(dto);
+            });
+        }
+        return productosPorSucursal;
+    }
+
+    /**
+     * obtiene todos los productos
+     *
+     */
+    @Override
+    public List<ProductoDto> obtenerProductos() {
+        List<Producto> productos = productoRepository.findAll();
+        return productos.stream()
+                .map(producto -> new ProductoDto( producto.getId(), producto.getNombre(), producto.getCantidadStock(),producto.getSucursal().getId()))
+                .collect(Collectors.toList());
     }
 }

@@ -1,10 +1,13 @@
 package com.prueba.backend.nequi.accenture.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@ToString(exclude = "sucursal")
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor@NoArgsConstructor
 public class Producto extends BaseEntity{
@@ -20,5 +23,6 @@ public class Producto extends BaseEntity{
 
     @ManyToOne
     @JoinColumn(name = "sucursal_id", nullable = false)
+    @JsonBackReference
     private Sucursal sucursal;
 }

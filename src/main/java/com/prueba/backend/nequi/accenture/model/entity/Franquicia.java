@@ -1,5 +1,6 @@
 package com.prueba.backend.nequi.accenture.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -8,6 +9,7 @@ import java.util.List;
 
 @Entity
 @Data
+@ToString(exclude = "sucursales")
 @EqualsAndHashCode(callSuper = false)
 @AllArgsConstructor@NoArgsConstructor
 public class Franquicia extends BaseEntity{
@@ -20,5 +22,6 @@ public class Franquicia extends BaseEntity{
     private String nombre;
 
     @OneToMany(mappedBy = "franquicia", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Sucursal> sucursales = new ArrayList<>();
 }

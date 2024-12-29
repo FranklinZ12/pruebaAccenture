@@ -55,7 +55,7 @@ public class SucursalServiceImpl implements ISucursalService {
     }
 
     /**
-     * todo las sucursales existentes
+     * obtiene toda las sucursales existentes
      * @return
      */
     @Override
