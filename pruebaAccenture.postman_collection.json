@@ -1,0 +1,237 @@
+{
+	"info": {
+		"_postman_id": "d336bf5a-459b-4385-93c4-d1e098df5848",
+		"name": "pruebaAccenture",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "19219642"
+	},
+	"item": [
+		{
+			"name": "franquicia",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"nombre\":\"Dominos\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9091/api/franquicia/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"api",
+						"franquicia",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucursales",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombreSucursal\": \"Aguacatala\",\r\n  \"idFranquicia\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9091/api/sucursal/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"api",
+						"sucursal",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ListarFranquicias",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9091/api/franquicia/listar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"api",
+						"franquicia",
+						"listar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "producto",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"nombreProducto\": \"Harina\",\r\n  \"idSucursal\": 2,\r\n  \"stock\": 7\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9091/api/producto/crear",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"api",
+						"producto",
+						"crear"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sucursal",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9091/api/sucursal/listar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"api",
+						"sucursal",
+						"listar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "producto",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"idProducto\":1,\r\n    \"stock\":5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:9091/api/producto/actualizar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"api",
+						"producto",
+						"actualizar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "producto",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9091/api/producto/eliminar/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"api",
+						"producto",
+						"eliminar",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "MayorStock",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9091/api/producto/2/productos-con-mas-stock",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"api",
+						"producto",
+						"2",
+						"productos-con-mas-stock"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "producto",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:9091/api/producto/listar",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "9091",
+					"path": [
+						"api",
+						"producto",
+						"listar"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
