@@ -12,11 +12,13 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
-public class SucursalService implements ISucursalService {
+public class SucursalServiceImpl implements ISucursalService {
     private SucursalRepository sucursalRepository;
     private FranquiciaRepository franquiciaRepository;
     /**
@@ -51,5 +53,18 @@ public class SucursalService implements ISucursalService {
 
         return SucursalMapper.mapToSucursalDto(sucursalGuardada, new SucursalDto());
     }
+
+    /**
+     * todo las sucursales existentes
+     * @return
+     */
+    @Override
+    public List<SucursalDto> obtenerSucursales() {
+        List<Sucursal> sucursales = sucursalRepository.findAll();
+        return sucursales.stream()
+                .map(sucursal -> new SucursalDto( sucursal.getNombre(), sucursal.getFranquicia().getId(), sucursal.getId()))
+                .collect(Collectors.toList());
+    }
+
 
 }
